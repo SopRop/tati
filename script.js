@@ -1,63 +1,70 @@
-let masterDiv = document.getElementById("master");
 let lettersArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '?', '!', '&', '@', '#'];
-let p = document.createElement('p');
+let masterDiv = document.getElementById("master");
 
 function getInput() {
     master.innerHTML = "";
     let valueInput = document.getElementById("word").value;
     let arrayInput = [...valueInput];
+    let arrayOfArray = [];
 
-    for (let char in arrayInput) {
-        let singleLetter = document.createElement('div');
-        singleLetter.id = arrayInput[char];
-        singleLetter.className = "letter";
-        singleLetter.innerHTML = (arrayInput[char]).toUpperCase();
-
-        // let randNumber = Math.floor(Math.random() * 6) + 4;
-
-        // let p = document.createElement('p');
-
-        // for (i = 1; i < randNumber; i++) {
-        //     let randLetter = lettersArray[Math.floor(Math.random() * lettersArray.length)];
-        //     setTimeout(function() {
-        //         // p.innerHTML = randLetter;
-        //         // masterDiv.appendChild(p);
-        //         // console.log('i', i);
-        //         // masterDiv.appendChild(randLetter);
-        //         console.log('randLetter :', randLetter);
-        //     }, 1000);
-        //   }
-
-        // console.log('number :', randNumber);
-
-
-        // console.log('rand :', randLetter);
-
-        replace();
-
-        masterDiv.appendChild(singleLetter);
-
-        // masterDiv.appendChild(singleLetter);
-
-
+    for (let char of arrayInput) {
+      array = loopChar(char);
+      arrayOfArray.push(array);
     }
-    // console.log('number :', number);
+
+    let idArray = 1;
+
+    for (let array of arrayOfArray) {
+
+      console.log('array', array);
+      var p = [];
+      // p[idArray] = array[index];
+      // console.log('test :', p[idArray]);
+
+
+      let p1 = document.createElement('p');
+      p1.setAttribute("id", `${idArray}`);
+      masterDiv.appendChild(p1);
+      
+      // idArray++;
+
+      var num = array.length;
+      var index = 0;
+      // console.log('length :', array.length);
+
+      let z = setInterval(function() {
+        // console.log('index :', index);
+        console.log('array[index] :', array[index]);
+        p[idArray] = array[index];
+        console.log('test :', p[idArray]);
+
+        // document.getElementById('master').innerHTML = 'mf';
+        // document.getElementById(`${idArray}`).innerHTML = array[index];
+
+        p1.innerHTML = array[index];
+        index++;
+          if (index === num) {
+            clearInterval(z);
+          }
+        }, 1000);
+
+      idArray++;
+    }
 }
 
-function replace() {
-    let randNumber = Math.floor(Math.random() * 6) + 4;
-    var i = 1;
+function loopChar(char) {
 
-    while (i < randNumber) {
-      (function(i) {
-        setTimeout(function() {
-            let randLetter = lettersArray[Math.floor(Math.random() * lettersArray.length)];
-            console.log('randLetter :', randLetter);
-            p.innerHTML = randLetter;
-            masterDiv.appendChild(p);
-        }, 200 * i)
-      }) (i++)
-    }
-};
+  let randNumber = Math.floor(Math.random() * 5) + 3;
+  let newArray = [];
+  var i = 1;
+
+  while (i < randNumber) {
+    let randLetter = lettersArray[Math.floor(Math.random() * lettersArray.length)];
+    newArray.push(randLetter);
+    i++;
+  }
+  newArray.push(char.toUpperCase());
+  return newArray;
+}
   
